@@ -6,8 +6,8 @@ A Upload Server For temporary use mostly helpful in ctfs etc.
 ## Features
 
 - Works Fine on Both Windows and Linux.
-- `localhost/list' => List all Files in Working Directory
-- `localhost/upload' => Upload using Browser
+- `localhost/list` => List all Files in Working Directory
+- `localhost/upload` => Upload using Browser
 - Only Uploading is implemented Directory listing is disabled 
 - ['.py,'.ipynb'] are blacklisted can be changed in code.
 
