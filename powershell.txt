@@ -1,0 +1,48 @@
+$Uri = 'https://api.contoso.com/v2/profile'
+$Form = @{
+    firstName  = 'John'
+    lastName   = 'Doe'
+    email      = 'john.doe@contoso.com'
+    avatar     = Get-Item -Path 'c:\Pictures\jdoe.png'
+    birthday   = '1980-10-15'
+    hobbies    = 'Hiking','Fishing','Jogging'
+}
+$Result = Invoke-WebRequest -Uri $Uri -Method Post -Form $Form
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+$multipartContent = [System.Net.Http.MultipartFormDataContent]::new()
+$multipartFile = 'C:\path\to\file.txt'
+$FileStream = [System.IO.FileStream]::new($multipartFile, [System.IO.FileMode]::Open)
+$fileHeader = [System.Net.Http.Headers.ContentDispositionHeaderValue]::new("form-data")
+$fileHeader.Name = "TestFile"
+$fileHeader.FileName = 'file.txt'
+$fileContent = [System.Net.Http.StreamContent]::new($FileStream)
+$fileContent.Headers.ContentDisposition = $fileHeader
+$fileContent.Headers.ContentType = [System.Net.Http.Headers.MediaTypeHeaderValue]::Parse("text/plain")
+$multipartContent.Add($fileContent)
+
+Invoke-WebRequest -Uri $uri -Body $multipartContent -Method 'POST'
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+$fileName = "..."
+$uri = "..."
+
+$currentPath = Convert-Path .
+$filePath="$currentPath\$fileName"
+
+$fileBin = [System.IO.File]::ReadAlltext($filePath)
+$boundary = [System.Guid]::NewGuid().ToString()
+$LF = "`r`n"
+$bodyLines = (
+    "--$boundary",
+    "Content-Disposition: form-data; name=`"file`"; filename=`"$fileName`"",
+    "Content-Type: application/octet-stream$LF",
+    $fileBin,
+    "--$boundary--$LF"
+) -join $LF
+
+Invoke-RestMethod -Uri $uri -Method Post -ContentType "multipart/form-data; boundary=`"$boundary`"" -Body $bodyLines
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
